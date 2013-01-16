@@ -47,7 +47,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6-x";
+		return "1.4.7-x";
 	}
 
 	@Override
@@ -332,11 +332,14 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					}
 				}
 				
-				llines.add(String.format("Ride %s(%d) / %s(%d)", 
+				llines.add(String.format("Ride %s(%d : %f) / %s(%d : %f)", 
 						target.ridingEntity == null ? "NULL" : target.ridingEntity.getClass().getSimpleName(),
 						target.ridingEntity == null ? 0 : target.ridingEntity.entityId,
+						target.ridingEntity == null ? 0 : target.ridingEntity.yOffset,
 						target.riddenByEntity == null ? "NULL" : target.riddenByEntity.getClass().getSimpleName(),
-						target.riddenByEntity == null ? 0 : target.riddenByEntity.entityId));
+						target.riddenByEntity == null ? 0 : target.riddenByEntity.entityId,
+						target.riddenByEntity == null ? 0 : target.riddenByEntity.yOffset
+				));
 			} else {
 				llines.add("NOTARGET");
 			}
