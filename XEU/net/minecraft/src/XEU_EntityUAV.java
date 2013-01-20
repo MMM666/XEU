@@ -29,18 +29,17 @@ public class XEU_EntityUAV extends EntityPlayerSP {
 	
 	@Override
 	public void onUpdate() {
-        prevPosX = posX;
-        prevPosY = posY;
-        prevPosZ = posZ;
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
 		posX += motionX;
-        posY += motionY;
-        posZ += motionZ;
+		posY += motionY;
+		posZ += motionZ;
 //		onEntityUpdate();
 		entityAge++;
 		
 		if (onGround || entityAge > 100) {
 			setDead();
-			worldObj.setEntityDead(this);
 		}
 	}
 
