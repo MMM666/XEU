@@ -1,4 +1,4 @@
-ï»¿package net.minecraft.src;
+package net.minecraft.src;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -12,8 +12,8 @@ public class XEU_ItemRAYXANBER extends ItemSword {
     }
     
     /**
-     * æã‚‰ããƒãƒ«ãƒã‚µãƒ¼ãƒãƒ¼å´ã®å½“ãŸã‚Šåˆ¤å®šå‡¦ç†ãŒãŠã‹ã—ã„ã€‚
-     * è¦–ç‚¹ä½ç½®ã‚’è€ƒæ…®ã—ã¦ã„ãªã„è¨ˆç®—ãªã®ã§ã€æ¨™æº–ã®è¦–ç·šåˆ¤å®šã§ã¯è¶³å…ƒã®ãƒ–ãƒ­ãƒƒã‚¯ã§åˆ¤å®šãŒçµ‚ã‚ã‚‹ã€‚
+     * ‹°‚ç‚­ƒ}ƒ‹ƒ`ƒT[ƒo[‘¤‚Ì“–‚½‚è”»’èˆ—‚ª‚¨‚©‚µ‚¢B
+     * ‹“_ˆÊ’u‚ğl—¶‚µ‚Ä‚¢‚È‚¢ŒvZ‚È‚Ì‚ÅA•W€‚Ì‹ü”»’è‚Å‚Í‘«Œ³‚ÌƒuƒƒbƒN‚Å”»’è‚ªI‚í‚éB
      */
     public MovingObjectPosition getRayTrace(EntityLiving pEntityLiving, double pRange, float pDelta) {
         Vec3 var4 = pEntityLiving.getPosition(pDelta);
@@ -29,13 +29,13 @@ public class XEU_ItemRAYXANBER extends ItemSword {
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
     	if (!world.isRemote) 
     	{
-        	// è¦–ç·šæ–¹å‘ã«å°„ç¨‹ï¼‘ï¼
+        	// ‹ü•ûŒü‚ÉË’ö‚P‚O
         	float f = 1.0F;
         	double d = 10D;
-    		// TODO:littleMaidç”¨ã‚³ãƒ¼ãƒ‰ã“ã“ã‹ã‚‰
+    		// TODO:littleMaid—pƒR[ƒh‚±‚±‚©‚ç
         	EntityLiving entityliving = entityplayer;
     		try {
-    			// å°„æ‰‹ã®æƒ…å ±ã‚’EntityLittleMaidAvatarã‹ã‚‰EntityLittleMaidã¸ç½®ãæ›ãˆã‚‹
+    			// Ëè‚Ìî•ñ‚ğEntityLittleMaidAvatar‚©‚çEntityLittleMaid‚Ö’u‚«Š·‚¦‚é
     			Field field = entityliving.getClass().getField("avatar");
     			entityliving = (EntityLiving)field.get(entityliving);
     		}
@@ -43,7 +43,7 @@ public class XEU_ItemRAYXANBER extends ItemSword {
     		}
     		catch (Exception e) {
     		}
-    		// ã“ã“ã¾ã§
+    		// ‚±‚±‚Ü‚Å
 
 //        	MovingObjectPosition moving = entityliving.rayTrace(d, f);
         	MovingObjectPosition moving = getRayTrace(entityliving, d, f);
@@ -141,41 +141,41 @@ public class XEU_ItemRAYXANBER extends ItemSword {
     		Entity par3Entity, int par4, boolean par5) {
     	super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
     	
-    	// ç¯„å›²æ”»æ’ƒ
+    	// ”ÍˆÍUŒ‚
 		if (par2World.isRemote) {
 			// Client
 			if (par3Entity instanceof EntityPlayer) {
 				EntityPlayer lep = (EntityPlayer)par3Entity;
 				if (lep.getCurrentEquippedItem() == par1ItemStack) {
-					// è…•ã®æŒ¯ã‚Šå§‹ã‚ã‚’æ¤œå‡ºã—ã¦åˆ¤å®šé–‹å§‹
+					// ˜r‚ÌU‚èn‚ß‚ğŒŸo‚µ‚Ä”»’èŠJn
 					if (lep.isSwingInProgress) {
 	    				Minecraft lmc = ModLoader.getMinecraftInstance();
 	        			if (lep.swingProgressInt == -1) {
-	        				// æ”»æ’ƒåˆ¤å®š
+	        				// UŒ‚”»’è
 	    					Entity lentity = null;
 	    					if (lmc != null && lmc.objectMouseOver != null) {
 	        					lentity = lmc.objectMouseOver.entityHit;
 	    					}
-	    					// è‡ªèº«ã®å‘¨å›²ã®MOBã‚’ç²å¾—
+	    					// ©g‚ÌüˆÍ‚ÌMOB‚ğŠl“¾
 	        				List llist = par2World.getEntitiesWithinAABB(EntityLiving.class, par3Entity.boundingBox.expand(5D, 0D, 5D));
 	        				for (int lj = 0; lj < llist.size(); lj++) {
-	        					// è‡ªåˆ†ã¨é€šå¸¸ã®å‡¦ç†å¯¾è±¡ã¯é™¤å¤–
+	        					// ©•ª‚Æ’Êí‚Ìˆ—‘ÎÛ‚ÍœŠO
 	        					EntityLiving lel = (EntityLiving)llist.get(lj);
 	        					if (lel == lentity || lel == lep) continue;
-	        					// å°„ç¨‹è·é›¢ã®åˆ¤å®šã€MOBã®å¤§ãã•ã‚’è€ƒæ…®
+	        					// Ë’ö‹——£‚Ì”»’èAMOB‚Ì‘å‚«‚³‚ğl—¶
 	        					double lln = 3.0D + (double)lel.width;
 	        					lln *= lln;
 	        					if (lep.getDistanceSqToEntity(lel) <= lln) {
-	           						// ç¯„å›²æ”»æ’ƒã®å¯¾è±¡
+	           						// ”ÍˆÍUŒ‚‚Ì‘ÎÛ
 	            					double lvx = lel.posX - lep.posX;
 	            					double lvz = lep.posZ - lel.posZ;
 	                				float lyaw = (float)Math.toDegrees(Math.atan2(lvx, lvz));
 	            					float lf = lep.rotationYaw - lyaw;
 	            					for (;lf > 360F; lf -= 360);
 	            					for (;lf < 0F; lf += 360);
-	            					// å·¦230dig - æ­£é¢180deg - å³100dig
+	            					// ¶230dig - ³–Ê180deg - ‰E100dig
 	        						if (lf > 100F && lf < 230F) {
-	            						// æ”»æ’ƒåˆ¤å®š
+	            						// UŒ‚”»’è
 	                        			System.out.println(String.format("%s, %d : %d : %f/%f : %f/%f", lel.getClass().getSimpleName(), lep.swingProgressInt, lep.attackTime, lep.getDistanceSqToEntity(lel), lln, lep.rotationYawHead, lf));
 	                					ModLoader.clientSendPacket(new Packet7UseEntity(lep.entityId, lel.entityId, 1));
 	                			        lep.attackTargetEntityWithCurrentItem(lel);
@@ -183,11 +183,11 @@ public class XEU_ItemRAYXANBER extends ItemSword {
 	        					}
 	        				}
 	        				
-	        				// ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
+	        				// ƒN[ƒ‹ƒ^ƒCƒ€
 	        				lep.attackTime = 20;
 	        			}
 	    				try {
-	        				// æ”»æ’ƒé–“éš”ã‚’å¼·åˆ¶çš„ã«ä¼¸ã°ã™(é€£æ‰“ãŒåŠ¹ã‹ãªã„ã‚ˆã†ã«)
+	        				// UŒ‚ŠÔŠu‚ğ‹­§“I‚ÉL‚Î‚·(˜A‘Å‚ªŒø‚©‚È‚¢‚æ‚¤‚É)
 	        				ModLoader.setPrivateValue(Minecraft.class, lmc, 28, lep.attackTime);
 	    				} catch (Exception e) {
 	    				}

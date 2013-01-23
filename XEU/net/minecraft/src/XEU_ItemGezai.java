@@ -1,4 +1,4 @@
-﻿package net.minecraft.src;
+package net.minecraft.src;
 
 public class XEU_ItemGezai extends ItemFood {
 

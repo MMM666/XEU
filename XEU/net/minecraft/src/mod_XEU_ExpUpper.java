@@ -1,4 +1,4 @@
-ï»¿package net.minecraft.src;
+package net.minecraft.src;
 
 import java.awt.Canvas;
 import java.awt.Component;
@@ -53,7 +53,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	@Override
 	public void load() {
 		if (MMM_Helper.isClient) {
-			// GUI ã‚’é–‹ãã‚­ãƒ¼ã®ç™»éŒ²ã¨åç§°å¤‰æ›ãƒ†ãƒ¼ãƒ–ãƒ«ã®ç™»éŒ²
+			// GUI ‚ğŠJ‚­ƒL[‚Ì“o˜^‚Æ–¼Ì•ÏŠ·ƒe[ƒuƒ‹‚Ì“o˜^
 			String s = "key.ExpUpper";
 			ModLoader.registerKey(this, new KeyBinding(s, 23), false);
 			ModLoader.addLocalization(
@@ -62,7 +62,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					);
 			ModLoader.addLocalization(
 					(new StringBuilder()).append(s).toString(), "ja_JP",
-					(new StringBuilder()).append("ãƒ¬ãƒƒãƒ™ãƒ«ã‚¢ãƒƒãƒ").toString()
+					(new StringBuilder()).append("ƒŒƒbƒxƒ‹ƒAƒbƒ|").toString()
 					);
 			
 			s = "key.ToggleRain";
@@ -73,7 +73,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					);
 			ModLoader.addLocalization(
 					(new StringBuilder()).append(s).toString(), "ja_JP",
-					(new StringBuilder()).append("é›¨ãŒé™ã£ãŸã‚Šæ­¢ã‚“ã ã‚Š").toString()
+					(new StringBuilder()).append("‰J‚ª~‚Á‚½‚è~‚ñ‚¾‚è").toString()
 					);
 			s = "key.TFV.NextItem";
 			ModLoader.registerKey(this, new KeyBinding(s, -97), false);
@@ -83,7 +83,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					);
 			ModLoader.addLocalization(
 					(new StringBuilder()).append(s).toString(), "ja_JP",
-					(new StringBuilder()).append("æ¬¡ã®ã‚¢ã‚¤ãƒ†ãƒ ").toString()
+					(new StringBuilder()).append("Ÿ‚ÌƒAƒCƒeƒ€").toString()
 					);
 			s = "key.TFV.PrevItem";
 			ModLoader.registerKey(this, new KeyBinding(s, -96), false);
@@ -93,7 +93,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					);
 			ModLoader.addLocalization(
 					(new StringBuilder()).append(s).toString(), "ja_JP",
-					(new StringBuilder()).append("å‰ã®ã‚¢ã‚¤ãƒ†ãƒ ").toString()
+					(new StringBuilder()).append("‘O‚ÌƒAƒCƒeƒ€").toString()
 					);
 		}
 		
@@ -102,7 +102,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		if (ItemIDRAYXANBER > 0) {
 			itemRAYXANBER = (new XEU_ItemRAYXANBER(ItemIDRAYXANBER - 256, EnumToolMaterial.IRON)).setIconCoord(2, 4).setItemName("RAYXANBER");
 			ModLoader.addName(itemRAYXANBER, "RAYXANBER");
-			ModLoader.addName(itemRAYXANBER, "ja_JP", "é›·æ–¬åˆƒ");
+			ModLoader.addName(itemRAYXANBER, "ja_JP", "—‹an");
 			ModLoader.addRecipe(new ItemStack(itemRAYXANBER), new Object[] {
 				"RIR", 
 				"RIR", 
@@ -117,7 +117,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		if (BlockIDRegenerate > 0) {
 			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).setBlockName("regenerate");
 			ModLoader.addName(blockRegenerate, "Regenerate");
-			ModLoader.addName(blockRegenerate, "ja_JP", "è‡ªå·±å†ç”ŸåœŸ");
+			ModLoader.addName(blockRegenerate, "ja_JP", "©ŒÈÄ¶“y");
 			ModLoader.registerBlock(blockRegenerate);
 		}
 		
@@ -125,7 +125,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		if (ItemIDUAV > 0 && MMM_Helper.isClient) {
 			itemUAV = (new XEU_ItemUAV(ItemIDUAV - 256)).setIconCoord(14, 0).setItemName("uav");
 			ModLoader.addName(itemUAV, "UAV");
-			ModLoader.addName(itemUAV, "ja_JP", "æ¢æŸ»æ©Ÿ");
+			ModLoader.addName(itemUAV, "ja_JP", "’T¸‹@");
 			ModLoader.addRecipe(new ItemStack(itemUAV), new Object[] {
 				"W W", 
 				"W W", 
@@ -136,11 +136,11 @@ public class mod_XEU_ExpUpper extends BaseMod {
 //            ModLoader.setInGameHook(this, true, false);
 		}
 		
-		// é»’çŒ«ãƒãƒ³ãƒ‰
+		// •”Lƒnƒ“ƒh
 		if (ItemIDCatRemover > 0) {
 			itemCatRemover = (new XEU_ItemCatRemover(ItemIDCatRemover - 256)).setIconCoord(2, 8).setItemName("catHand");
 			ModLoader.addName(itemCatRemover, "Cat Hand");
-			ModLoader.addName(itemCatRemover, "ja_JP", "é»’çŒ«ãƒãƒ³ãƒ‰");
+			ModLoader.addName(itemCatRemover, "ja_JP", "•”Lƒnƒ“ƒh");
 			ModLoader.addRecipe(new ItemStack(itemCatRemover), new Object[] {
 				"WEW", 
 				"WBW", 
@@ -153,10 +153,10 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		}
 		
 		if (ItemIDGezai > 0) {
-			// è™«ä¸‹ã—
+			// ’‰º‚µ
 			itemGezai = (new XEU_ItemGezai(ItemIDGezai - 256, -5, 1.0F, false)).setIconCoord(11, 5).setItemName("gezai");
 			ModLoader.addName(itemGezai, "GEZAI");
-			ModLoader.addName(itemGezai, "ja_JP", "ä¸‹å‰¤");
+			ModLoader.addName(itemGezai, "ja_JP", "‰ºÜ");
 			ModLoader.addRecipe(new ItemStack(itemGezai), new Object[] {
 				"Z", 
 				Character.valueOf('Z'), Item.rottenFlesh
@@ -187,9 +187,9 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		}
 		
 		
-		// ç°¡æ˜“ã‚¹ã‚«ã‚¦ã‚¿ãƒ¼
+		// ŠÈˆÕƒXƒJƒEƒ^[
 		if (MMM_Helper.isClient) {
-			// GUI ã‚’é–‹ãã‚­ãƒ¼ã®ç™»éŒ²ã¨åç§°å¤‰æ›ãƒ†ãƒ¼ãƒ–ãƒ«ã®ç™»éŒ²
+			// GUI ‚ğŠJ‚­ƒL[‚Ì“o˜^‚Æ–¼Ì•ÏŠ·ƒe[ƒuƒ‹‚Ì“o˜^
 			String s = "key.Lockon";
 			ModLoader.registerKey(this, new KeyBinding(s, 157), false);
 			ModLoader.addLocalization(
@@ -199,12 +199,12 @@ public class mod_XEU_ExpUpper extends BaseMod {
 			ModLoader.addLocalization(
 					(new StringBuilder()).append(s).toString(),
 					"ja_JP",
-					(new StringBuilder()).append("ãƒ­ãƒƒã‚¯ã‚ªãƒ³").toString()
+					(new StringBuilder()).append("ƒƒbƒNƒIƒ“").toString()
 					);
 			
 		}
 		
-		// ã‚³ãƒãƒ³ãƒ‰ãƒ–ãƒ­ãƒƒã‚¯ã®ã‚¯ãƒªã‚¨ã‚¤ãƒˆã‚¿ã‚°ã¸ã®è¿½åŠ 
+		// ƒRƒ}ƒ“ƒhƒuƒƒbƒN‚ÌƒNƒŠƒGƒCƒgƒ^ƒO‚Ö‚Ì’Ç‰Á
 		Block.blocksList[Block.commandBlock.blockID].setCreativeTab(CreativeTabs.tabRedstone);
 		
 		ModLoader.setInGameHook(this, true, false);
@@ -253,7 +253,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		if (entityUAV != null && !entityUAV.isDead) {
 //       		entityUAV.onUpdate();
 		}
-		if (minecraft.currentScreen == null || minecraft.currentScreen instanceof GuiChat) {
+		if (minecraft.isIntegratedServerRunning() && (minecraft.currentScreen == null || minecraft.currentScreen instanceof GuiChat)) {
 			FontRenderer lfont = minecraft.fontRenderer;
 			List<String> llines = new ArrayList<String>();
 			if (target == null || target.isDead) {
@@ -270,7 +270,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					target = null;
 				}
 			}
-			// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ä½œæˆ
+			// ƒƒbƒZ[ƒW‚Ìì¬
 			if (target != null) {
 				String ls;
 				Class lclass;
