@@ -283,6 +283,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 				if (target instanceof EntityAgeable) {
 					llines.add(String.format("Age=%d", ((EntityAgeable)target).getGrowingAge()));
 				}
+				llines.add(String.format("onGround:%b, InWater:%b(%d)", target.onGround, target.inWater, target.getAir()));
 				ls = "EIT_EntityChicken";
 				if (target.getClass().getSimpleName().equals(ls)) {
 					lclass = MMM_Helper.getNameOfClass(ls);
@@ -328,6 +329,12 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					lclass = MMM_Helper.getNameOfClass(ls);
 					try {
 						llines.add(String.format("C-Limit=%d(%f)", (Integer)lclass.getDeclaredField("maidContractLimit").get(target), (Float)lclass.getMethod("getContractLimitDays").invoke(target)));
+						int lti = (Integer)lclass.getDeclaredField("textureIndex").get(target);
+						int lai = (Integer)lclass.getDeclaredField("textureArmorIndex").get(target);
+						llines.add(String.format("Texture=%s(%x), %s(%x)",
+								MMM_TextureManager.getIndexToString(lti), lti,
+								MMM_TextureManager.getIndexToString(lai), lai
+								));
 					} catch (Exception e) {
 					}
 				}
@@ -340,6 +347,28 @@ public class mod_XEU_ExpUpper extends BaseMod {
 						target.riddenByEntity == null ? 0 : target.riddenByEntity.entityId,
 						target.riddenByEntity == null ? 0 : target.riddenByEntity.yOffset
 				));
+				if (target instanceof EntityLiving) {
+					EntityLiving lel = (EntityLiving)target;
+					if (lel.isAIEnabled()) {
+						List llist = getEcecutingTasks(lel.tasks);
+						if (llist != null) {
+							llines.add("Tasks:" + llist.size());
+							for (Object lo : llist) {
+								EntityAITaskEntry lte = (EntityAITaskEntry)lo;
+								llines.add(String.format("%4d : %s", lte.priority, lte.action.getClass().getSimpleName()));
+							}
+						}
+						llist = getEcecutingTasks(lel.targetTasks);
+						if (llist != null) {
+							llines.add("targetTasks:" + llist.size());
+							for (Object lo : llist) {
+								EntityAITaskEntry lte = (EntityAITaskEntry)lo;
+								llines.add(String.format("%4d : %s", lte.priority, lte.action.getClass().getSimpleName()));
+							}
+						}
+					}
+				}
+				
 			} else {
 				llines.add("NOTARGET");
 			}
@@ -359,6 +388,15 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		return true;
 	}
 
+	private List getEcecutingTasks(EntityAITasks ptasks) {
+		List llist = null;
+		try {
+			llist = (List)ModLoader.getPrivateValue(EntityAITasks.class, ptasks, 1);
+		} catch (Exception e) {
+		}
+		return llist;
+	}
+	
 	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 		super.generateSurface(world, random, i, j);
