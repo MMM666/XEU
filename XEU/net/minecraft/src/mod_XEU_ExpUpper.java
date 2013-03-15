@@ -207,6 +207,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		// コマンドブロックのクリエイトタグへの追加
 		Block.blocksList[Block.commandBlock.blockID].setCreativeTab(CreativeTabs.tabRedstone);
 		
+		
 		ModLoader.setInGameHook(this, true, false);
 		
 		System.out.println(String.format("MoudeButtonCount:%d", Mouse.getButtonCount()));
