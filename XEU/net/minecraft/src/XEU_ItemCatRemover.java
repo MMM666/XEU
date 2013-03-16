@@ -5,6 +5,7 @@ public class XEU_ItemCatRemover extends Item {
 	protected XEU_ItemCatRemover(int par1) {
 		super(par1);
 		setMaxDamage(36);
+		setCreativeTab(CreativeTabs.tabTools);
 	}
 	
 	

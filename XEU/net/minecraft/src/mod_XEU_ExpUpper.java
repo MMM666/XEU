@@ -47,7 +47,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.7-x";
+		return "1.5.0-x";
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// RAYXANBER
 		if (ItemIDRAYXANBER > 0) {
-			itemRAYXANBER = (new XEU_ItemRAYXANBER(ItemIDRAYXANBER - 256, EnumToolMaterial.IRON)).setIconCoord(2, 4).setItemName("RAYXANBER");
+			itemRAYXANBER = (new XEU_ItemRAYXANBER(ItemIDRAYXANBER - 256, EnumToolMaterial.IRON)).setUnlocalizedName("RAYXANBER");
 			ModLoader.addName(itemRAYXANBER, "RAYXANBER");
 			ModLoader.addName(itemRAYXANBER, "ja_JP", "óãéaên");
 			ModLoader.addRecipe(new ItemStack(itemRAYXANBER), new Object[] {
@@ -115,7 +115,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// Regenarate Block
 		if (BlockIDRegenerate > 0) {
-			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).setBlockName("regenerate");
+			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("regenerate");
 			ModLoader.addName(blockRegenerate, "Regenerate");
 			ModLoader.addName(blockRegenerate, "ja_JP", "é©å»çƒê∂ìy");
 			ModLoader.registerBlock(blockRegenerate);
@@ -123,7 +123,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// UAV
 		if (ItemIDUAV > 0 && MMM_Helper.isClient) {
-			itemUAV = (new XEU_ItemUAV(ItemIDUAV - 256)).setIconCoord(14, 0).setItemName("uav");
+			itemUAV = (new XEU_ItemUAV(ItemIDUAV - 256)).setUnlocalizedName("uav");
 			ModLoader.addName(itemUAV, "UAV");
 			ModLoader.addName(itemUAV, "ja_JP", "íTç∏ã@");
 			ModLoader.addRecipe(new ItemStack(itemUAV), new Object[] {
@@ -138,7 +138,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// çïîLÉnÉìÉh
 		if (ItemIDCatRemover > 0) {
-			itemCatRemover = (new XEU_ItemCatRemover(ItemIDCatRemover - 256)).setIconCoord(2, 8).setItemName("catHand");
+			itemCatRemover = (new XEU_ItemCatRemover(ItemIDCatRemover - 256)).setUnlocalizedName("catHand");
 			ModLoader.addName(itemCatRemover, "Cat Hand");
 			ModLoader.addName(itemCatRemover, "ja_JP", "çïîLÉnÉìÉh");
 			ModLoader.addRecipe(new ItemStack(itemCatRemover), new Object[] {
@@ -154,7 +154,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		if (ItemIDGezai > 0) {
 			// íéâ∫Çµ
-			itemGezai = (new XEU_ItemGezai(ItemIDGezai - 256, -5, 1.0F, false)).setIconCoord(11, 5).setItemName("gezai");
+			itemGezai = (new XEU_ItemGezai(ItemIDGezai - 256, -5, 1.0F, false)).setUnlocalizedName("gezai");
 			ModLoader.addName(itemGezai, "GEZAI");
 			ModLoader.addName(itemGezai, "ja_JP", "â∫ç‹");
 			ModLoader.addRecipe(new ItemStack(itemGezai), new Object[] {

@@ -12,7 +12,7 @@ public class XEU_EntityUAV extends EntityPlayerSP {
 		setSize(0.0F, 0.0F);
 		entityAge = 0;
 	}
-	
+
 	@Override
 	public void setDead() {
 		super.setDead();
@@ -26,7 +26,7 @@ public class XEU_EntityUAV extends EntityPlayerSP {
 	public int getMaxHealth() {
 		return 0;
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		prevPosX = posX;
