@@ -63,7 +63,7 @@ public class XEU_BlockRegenerate extends Block {
 			int j1 = (j + random.nextInt(5)) - 3;
 			int k1 = (k + random.nextInt(11)) - 6;
 			if (world.getBlockId(i1, j1, k1) == 0) {
-				world.setBlockAndMetadataWithNotify(i1, j1, k1, Block.grass.blockID, 0 , 2);
+				world.setBlockMetadataWithNotify(i1, j1, k1, Block.grass.blockID, 0);
 			}
 		}
 	}

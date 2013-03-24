@@ -45,9 +45,11 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	public static Entity target;
 	public static boolean isHold = false;
 
+
+
 	@Override
 	public String getVersion() {
-		return "1.5.0-x";
+		return "1.5.1-x";
 	}
 
 	@Override
@@ -115,7 +117,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// Regenarate Block
 		if (BlockIDRegenerate > 0) {
-			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("regenerate");
+			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).getIndirectPowerOutput("regenerate");
 			ModLoader.addName(blockRegenerate, "Regenerate");
 			ModLoader.addName(blockRegenerate, "ja_JP", "é©å»çƒê∂ìy");
 			ModLoader.registerBlock(blockRegenerate);
