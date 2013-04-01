@@ -117,7 +117,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// Regenarate Block
 		if (BlockIDRegenerate > 0) {
-			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).getIndirectPowerOutput("regenerate");
+			blockRegenerate = (new XEU_BlockRegenerate(BlockIDRegenerate)).setHardness(10F).setResistance(2000F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("regenerate");
 			ModLoader.addName(blockRegenerate, "Regenerate");
 			ModLoader.addName(blockRegenerate, "ja_JP", "©ŒÈÄ¶“y");
 			ModLoader.registerBlock(blockRegenerate);
@@ -249,6 +249,8 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	@Override
 	public void addRenderer(Map map) {
 		map.put(XEU_EntityUAV.class, new MMM_RenderDummy());
+		// ŠJ”­ŠÂ‹«‚¾‚Æ‚¤‚Ü‚­“®ì‚µ‚È‚¢‚Ì‚Å‚»‚Ì‘Îô
+		map.put(EntityPlayer.class, new RenderPlayer());
 	}
 
 	@Override

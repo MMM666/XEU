@@ -12,8 +12,8 @@ public class XEU_BlockRegenerate extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
-		return Block.grass.getBlockTextureFromSideAndMetadata(i, j);
+	public Icon getIcon(int i, int j) {
+		return Block.grass.getIcon(i, j);
 	}
 
 	@Override
