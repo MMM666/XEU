@@ -41,9 +41,6 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	@MLProp
 	public static int ItemIDGezai = 22293;
 	public static Item itemGezai;
-	
-	public static Entity target;
-	public static boolean isHold = false;
 
 
 
@@ -188,24 +185,6 @@ public class mod_XEU_ExpUpper extends BaseMod {
 			} while(oo != null);
 		}
 		
-		
-		// 簡易スカウター
-		if (MMM_Helper.isClient) {
-			// GUI を開くキーの登録と名称変換テーブルの登録
-			String s = "key.Lockon";
-			ModLoader.registerKey(this, new KeyBinding(s, 157), false);
-			ModLoader.addLocalization(
-					(new StringBuilder()).append(s).toString(),
-					(new StringBuilder()).append("Lock ON").toString()
-					);
-			ModLoader.addLocalization(
-					(new StringBuilder()).append(s).toString(),
-					"ja_JP",
-					(new StringBuilder()).append("ロックオン").toString()
-					);
-			
-		}
-		
 		// コマンドブロックのクリエイトタグへの追加
 		Block.blocksList[Block.commandBlock.blockID].setCreativeTab(CreativeTabs.tabRedstone);
 		
@@ -234,9 +213,6 @@ public class mod_XEU_ExpUpper extends BaseMod {
 					mcGame.thePlayer.sendChatMessage("Call Rain.");
 				}
 			}
-			if (keybinding.keyDescription.endsWith(".Lockon")) {
-				isHold = !isHold;
-			}
 			if (keybinding.keyDescription.endsWith(".TFV.NextItem")) {
 				mcGame.thePlayer.inventory.changeCurrentItem(1);
 			}
@@ -258,137 +234,6 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		if (entityUAV != null && !entityUAV.isDead) {
 //       		entityUAV.onUpdate();
 		}
-		if (minecraft.isIntegratedServerRunning() && (minecraft.currentScreen == null || minecraft.currentScreen instanceof GuiChat)) {
-			FontRenderer lfont = minecraft.fontRenderer;
-			List<String> llines = new ArrayList<String>();
-			if (target == null || target.isDead) {
-				isHold = false;
-				target = null;
-			}
-			if (!isHold) {
-				if (minecraft.objectMouseOver != null 
-						&& minecraft.objectMouseOver.typeOfHit == EnumMovingObjectType.ENTITY
-						&& minecraft.objectMouseOver.entityHit != null) {
-					Entity lentity = minecraft.objectMouseOver.entityHit;
-					target = MinecraftServer.getServer().worldServers[0].getEntityByID(lentity.entityId);
-				} else {
-					target = null;
-				}
-			}
-			// メッセージの作成
-			if (target != null) {
-				String ls;
-				Class lclass;
-				llines.add(String.format("%s (%d)", target.getClass().getSimpleName(), target.entityId));
-				llines.add(String.format("%s", target.worldObj.getClass().getSimpleName()));
-				llines.add(String.format("Range=%6f(%f)", minecraft.thePlayer.getDistanceToEntity(target), target.width));
-				if (target instanceof EntityLiving) {
-					llines.add(String.format("Health=%d", ((EntityLiving)target).health));
-				}
-				if (target instanceof EntityAgeable) {
-					llines.add(String.format("Age=%d", ((EntityAgeable)target).getGrowingAge()));
-				}
-				llines.add(String.format("onGround:%b, InWater:%b(%d)", target.onGround, target.inWater, target.getAir()));
-				ls = "EIT_EntityChicken";
-				if (target.getClass().getSimpleName().equals(ls)) {
-					lclass = MMM_Helper.getNameOfClass(ls);
-					try {
-						llines.add(String.format("Frontal=%b/%b", (Boolean)lclass.getMethod("isFullFrontal", new Class[] {}).invoke(target, new Object[] {}), (Boolean)lclass.getField("fFullFrontal").get(target)));
-						llines.add(String.format("HPMax=%b", (Integer)lclass.getMethod("isHPMax", new Class[] {}).invoke(target, new Object[] {})));
-					} catch (Exception e) {
-					}
-				}
-				if (target instanceof EntityChicken) {
-					llines.add(String.format("NextEgg=%d", ((EntityChicken)target).timeUntilNextEgg));
-				}
-				if (target instanceof EntityLiving) {
-					Entity lentity;
-					EntityLiving lliving = (EntityLiving)target;
-					lentity = lliving.getAttackTarget();
-					if (lentity != null) {
-						llines.add(String.format("AttackTarget=%S(Alive:%b/Dead:%b)", lentity.getClass().getSimpleName(), lentity.isEntityAlive(), lentity.isDead));
-					} else {
-						llines.add("AttackTarget=NoTarget");
-					}
-					lentity = lliving.getAITarget();
-					if (lentity != null) {
-						llines.add(String.format("AITarget=%S(Alive:%b/Dead:%b)", lentity.getClass().getSimpleName(), lentity.isEntityAlive(), lentity.isDead));
-					} else {
-						llines.add("AITarget=NoTarget");
-					}
-					llines.add(String.format("Dir YawB=%f/ %f/ %f", lliving.rotationYaw, lliving.prevRotationYaw, lliving.newRotationYaw));
-					llines.add(String.format("Dir YawR=%f/ %f", lliving.renderYawOffset, lliving.prevRenderYawOffset));
-					llines.add(String.format("Dir YawH=%f/ %f", lliving.rotationYawHead, lliving.prevRotationYawHead));
-				}
-				if (target instanceof EntityCreature) {
-					Entity lentity;
-					lentity = ((EntityCreature)target).getEntityToAttack();
-					if (lentity != null) {
-						llines.add(String.format("entityToAttack=%S(Alive:%b/Dead:%b)", lentity.getClass().getSimpleName(), lentity.isEntityAlive(), lentity.isDead));
-					} else {
-						llines.add("entityToAttack=NoTarget");
-					}
-				}
-				ls = "LMM_EntityLittleMaid";
-				if (target.getClass().getSimpleName().equals(ls)) {
-					lclass = MMM_Helper.getNameOfClass(ls);
-					try {
-						llines.add(String.format("C-Limit=%d(%f)", (Integer)lclass.getDeclaredField("maidContractLimit").get(target), (Float)lclass.getMethod("getContractLimitDays").invoke(target)));
-						int lti = (Integer)lclass.getDeclaredField("textureIndex").get(target);
-						int lai = (Integer)lclass.getDeclaredField("textureArmorIndex").get(target);
-						llines.add(String.format("Texture=%s(%x), %s(%x)",
-								MMM_TextureManager.getIndexToString(lti), lti,
-								MMM_TextureManager.getIndexToString(lai), lai
-								));
-					} catch (Exception e) {
-					}
-				}
-				
-				llines.add(String.format("Ride %s(%d : %f) / %s(%d : %f)", 
-						target.ridingEntity == null ? "NULL" : target.ridingEntity.getClass().getSimpleName(),
-						target.ridingEntity == null ? 0 : target.ridingEntity.entityId,
-						target.ridingEntity == null ? 0 : target.ridingEntity.yOffset,
-						target.riddenByEntity == null ? "NULL" : target.riddenByEntity.getClass().getSimpleName(),
-						target.riddenByEntity == null ? 0 : target.riddenByEntity.entityId,
-						target.riddenByEntity == null ? 0 : target.riddenByEntity.yOffset
-				));
-				if (target instanceof EntityLiving) {
-					EntityLiving lel = (EntityLiving)target;
-					if (lel.isAIEnabled()) {
-						List llist = getEcecutingTasks(lel.tasks);
-						if (llist != null) {
-							llines.add("Tasks:" + llist.size());
-							for (Object lo : llist) {
-								EntityAITaskEntry lte = (EntityAITaskEntry)lo;
-								llines.add(String.format("%4d : %s", lte.priority, lte.action.getClass().getSimpleName()));
-							}
-						}
-						llist = getEcecutingTasks(lel.targetTasks);
-						if (llist != null) {
-							llines.add("targetTasks:" + llist.size());
-							for (Object lo : llist) {
-								EntityAITaskEntry lte = (EntityAITaskEntry)lo;
-								llines.add(String.format("%4d : %s", lte.priority, lte.action.getClass().getSimpleName()));
-							}
-						}
-					}
-				}
-				
-			} else {
-				llines.add("NOTARGET");
-			}
-			// Draw
-			int lj = 5;
-			for (String ls : llines) {
-				lfont.drawStringWithShadow(ls, 5, lj, isHold ? 0x00ffcccc : 0x00ffffff);
-				lj += lfont.FONT_HEIGHT;
-			}
-			llines.clear();
-		}
-//    	System.out.println(MinecraftServer.getServer() == null ? "noServer" : "AliveServer");
-		if (false && Mouse.getEventButtonState()) {
-			System.out.println(String.format("MoudeButtonEvent:%d", Mouse.getEventButton()));
-		}
 
 		return true;
 	}
@@ -405,16 +250,6 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 		super.generateSurface(world, random, i, j);
-	}
-	
-	@Override
-	public void clientDisconnect(NetClientHandler var1) {
-		target = null;
-	}
-	
-	@Override
-	public void clientConnect(NetClientHandler var1) {
-		target = null;
 	}
 	
 }
