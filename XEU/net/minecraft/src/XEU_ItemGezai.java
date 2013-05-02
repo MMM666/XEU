@@ -22,4 +22,16 @@ public class XEU_ItemGezai extends ItemFood {
 		return super.requiresMultipleRenderPasses();
 	}
 
+	@Override
+	protected void onFoodEaten(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer) {
+		super.onFoodEaten(par1ItemStack, par2World, par3EntityPlayer);
+		if (par3EntityPlayer.foodStats.getFoodLevel() < 0) {
+			par3EntityPlayer.foodStats.setFoodLevel(0);
+		}
+		if (par3EntityPlayer.foodStats.getSaturationLevel() < 0) {
+			par3EntityPlayer.foodStats.setFoodSaturationLevel(0);
+		}
+	}
+
 }
