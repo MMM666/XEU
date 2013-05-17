@@ -42,6 +42,11 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	public static int ItemIDGezai = 22293;
 	public static Item itemGezai;
 
+	@MLProp
+	public static int ItemIDVillager = 22294;
+	public static Item itemVillagerRaw;
+	public static Item itemVillagerCooked;
+
 
 
 	@Override
@@ -192,6 +197,20 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		ModLoader.setInGameHook(this, true, false);
 		
 		System.out.println(String.format("MoudeButtonCount:%d", Mouse.getButtonCount()));
+		
+		// 村人虐殺どろっぴ
+		MMM_Helper.replaceEntityList(EntityVillager.class, XEU_EntityVillager.class);
+		if (ItemIDVillager > 0) {
+			itemVillagerRaw = (new XEU_ItemVillagerFlesh(ItemIDVillager + 0, 3, 0.3F, true)).setUnlocalizedName("villagerRaw");
+			itemVillagerCooked = (new XEU_ItemVillagerFlesh(ItemIDVillager + 1, 8, 0.8F, true)).setUnlocalizedName("villagerCooked");
+			ModLoader.addLocalization("message.xeu.eatVillager", "Delicious! This is your favorite villager flesh! ");
+			ModLoader.addLocalization("message.xeu.eatVillager", "ja_JP", "うまい!これはあなたの好きな人肉だ!");
+			ModLoader.addName(itemVillagerRaw, "?Raw Meat");
+			ModLoader.addName(itemVillagerRaw, "ja_JP", "?生肉");
+			ModLoader.addName(itemVillagerCooked, "?Cooked Meat");
+			ModLoader.addName(itemVillagerCooked, "ja_JP", "?焼肉");
+		}
+		
 	}
 
 	@Override
@@ -227,6 +246,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		map.put(XEU_EntityUAV.class, new MMM_RenderDummy());
 		// 開発環境だとうまく動作しないのでその対策
 		map.put(EntityPlayer.class, new RenderPlayer());
+		map.put(XEU_EntityVillager.class, new RenderVillager());
 	}
 
 	@Override
