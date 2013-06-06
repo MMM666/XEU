@@ -254,7 +254,32 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		if (entityUAV != null && !entityUAV.isDead) {
 //       		entityUAV.onUpdate();
 		}
+		if (minecraft.isIntegratedServerRunning() && !MMM_Helper.isForge) {
+			for (int lj = 0; lj < MinecraftServer.getServer().worldServers.length; lj++) {
+				List llist = MinecraftServer.getServer().worldServers[lj].loadedEntityList;
+				for (int li = 0; li < llist.size(); li++) {
+					Entity lentity = (Entity)llist.get(li);
+					if (lentity.getClass().isAssignableFrom(EntityVillager.class)) {
+						XEU_EntityVillager.respawnVillager((EntityVillager)lentity);
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
 
+	public boolean onTickInGame(MinecraftServer minecraftServer) {
+		// 動作未チェック
+		for (int lj = 0; lj < minecraftServer.worldServers.length; lj++) {
+			List llist = minecraftServer.worldServers[lj].loadedEntityList;
+			for (int li = 0; li < llist.size(); li++) {
+				Entity lentity = (Entity)llist.get(li);
+				if (lentity.getClass().isAssignableFrom(EntityVillager.class)) {
+					XEU_EntityVillager.respawnVillager((EntityVillager)lentity);
+				}
+			}
+		}
 		return true;
 	}
 

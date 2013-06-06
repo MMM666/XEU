@@ -10,6 +10,14 @@ public class XEU_EntityVillager extends EntityVillager {
 		super(par1World, par2);
 	}
 
+	public static void respawnVillager(EntityVillager pEntity) {
+		if (pEntity.isDead) return;
+		XEU_EntityVillager lentity = new XEU_EntityVillager(pEntity.worldObj, pEntity.getProfession());
+		lentity.setLocationAndAngles(pEntity.posX, pEntity.posY, pEntity.posZ, pEntity.rotationYaw, pEntity.rotationPitch);
+		pEntity.worldObj.spawnEntityInWorld(lentity);
+		pEntity.setDead();
+	}
+
 	@Override
 	protected int getDropItemId() {
 		if (mod_XEU_ExpUpper.itemVillagerRaw == null) {
