@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 
-public class XEU_ItemRAYXANBER extends ItemSword {
+public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManager {
 
 	public XEU_ItemRAYXANBER(int i, EnumToolMaterial enumtoolmaterial) {
 		super(i, enumtoolmaterial);
@@ -231,6 +231,29 @@ public class XEU_ItemRAYXANBER extends ItemSword {
 			}
 
 		}
+	}
+
+	@Override
+	public boolean renderItem(EntityLiving pEntityLiving, ItemStack pItemStack, int pIndex) {
+		return XEU_RenderWorldItem.renderItem(pEntityLiving, pItemStack, pIndex);
+	}
+
+	@Override
+	public boolean renderItemInFirstPerson(float pDeltaTimepRenderPhatialTick, MMM_ItemRenderer pItemRenderer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getRenderTexture() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRenderItemWorld() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
