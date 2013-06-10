@@ -209,6 +209,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 			ModLoader.addName(itemVillagerRaw, "ja_JP", "?¶“÷");
 			ModLoader.addName(itemVillagerCooked, "?Cooked Meat");
 			ModLoader.addName(itemVillagerCooked, "ja_JP", "?Ä“÷");
+			ModLoader.addSmelting(itemVillagerRaw.itemID, new ItemStack(itemVillagerCooked), 0.35F);
 		}
 		
 	}
