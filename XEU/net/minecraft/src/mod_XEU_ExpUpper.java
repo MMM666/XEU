@@ -47,7 +47,16 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	public static Item itemVillagerRaw;
 	public static Item itemVillagerCooked;
 
+	@MLProp
+	public static boolean isDebugMessage = true;
 
+
+	public static void Debug(String pText, Object... pVals) {
+		// デバッグメッセージ
+		if (isDebugMessage) {
+			System.out.println(String.format("XEU-" + pText, pVals));
+		}
+	}
 
 	@Override
 	public String getVersion() {
@@ -212,6 +221,14 @@ public class mod_XEU_ExpUpper extends BaseMod {
 			ModLoader.addSmelting(itemVillagerRaw.itemID, new ItemStack(itemVillagerCooked), 0.35F);
 		}
 		
+		// SilkMobSpawner
+		Block.blocksList[Block.mobSpawner.blockID] = null;
+		Block lmob = new XEU_BlockMobSpawner(Block.mobSpawner.blockID).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mobSpawner").disableStats().setCreativeTab(CreativeTabs.tabDecorations);
+		if (MMM_Helper.replaceBlock(Block.mobSpawner, lmob)) {
+			Debug("replace mobSpawner");
+		} else {
+			Debug("faild mobSpawner");
+		}
 	}
 
 	@Override
@@ -292,10 +309,10 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		}
 		return llist;
 	}
-	
+
 	@Override
 	public void generateSurface(World world, Random random, int i, int j) {
 		super.generateSurface(world, random, i, j);
 	}
-	
+
 }
