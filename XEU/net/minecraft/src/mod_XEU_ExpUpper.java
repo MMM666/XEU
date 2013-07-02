@@ -229,6 +229,9 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		} else {
 			Debug("faild mobSpawner");
 		}
+		
+		Debug("%d", MMM_Helper.getHexToInt("ffffffff"));
+		Debug("%x", MMM_Helper.getHexToInt("ffffffff"));
 	}
 
 	@Override
