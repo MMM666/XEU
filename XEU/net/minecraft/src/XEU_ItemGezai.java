@@ -33,5 +33,11 @@ public class XEU_ItemGezai extends ItemFood {
 			par3EntityPlayer.foodStats.setFoodSaturationLevel(0);
 		}
 	}
+	
+	@Override
+	protected String func_111208_A() {
+		// TODO Auto-generated method stub
+		return super.func_111208_A();
+	}
 
 }

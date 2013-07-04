@@ -3,8 +3,6 @@ package net.minecraft.src;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
-
 public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManager {
 
 	public XEU_ItemRAYXANBER(int i, EnumToolMaterial enumtoolmaterial) {
@@ -14,7 +12,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 	/**
 	 * 恐らくマルチサーバー側の当たり判定処理がおかしい。 視点位置を考慮していない計算なので、標準の視線判定では足元のブロックで判定が終わる。
 	 */
-	public MovingObjectPosition getRayTrace(EntityLiving pEntityLiving,
+	public MovingObjectPosition getRayTrace(EntityLivingBase pEntityLiving,
 			double pRange, float pDelta) {
 		Vec3 var4 = pEntityLiving.getPosition(pDelta);
 		if (pEntityLiving.yOffset == 0.0F) {
@@ -34,7 +32,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 			float f = 1.0F;
 			double d = 10D;
 			// TODO:littleMaid用コードここから
-			EntityLiving entityliving = entityplayer;
+			EntityLivingBase entityliving = entityplayer;
 			try {
 				// 射手の情報をEntityLittleMaidAvatarからEntityLittleMaidへ置き換える
 				Field field = entityliving.getClass().getField("avatar");
@@ -149,7 +147,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
-			EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
+			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 		// TODO Auto-generated method stub
 		return super.hitEntity(par1ItemStack, par2EntityLiving,
 				par3EntityLiving);
@@ -169,7 +167,8 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 					// 腕の振り始めを検出して判定開始
 					if (lep.isSwingInProgress) {
 						Minecraft lmc = ModLoader.getMinecraftInstance();
-						if (lep.swingProgressInt == -1) {
+//						if (lep.swingProgressInt == -1) {
+						if (lep.field_110158_av == -1) {
 							// 攻撃判定
 							Entity lentity = null;
 							if (lmc != null && lmc.objectMouseOver != null) {
@@ -181,7 +180,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 									par3Entity.boundingBox.expand(5D, 0D, 5D));
 							for (int lj = 0; lj < llist.size(); lj++) {
 								// 自分と通常の処理対象は除外
-								EntityLiving lel = (EntityLiving) llist.get(lj);
+								EntityLivingBase lel = (EntityLiving) llist.get(lj);
 								if (lel == lentity || lel == lep)
 									continue;
 								// 射程距離の判定、MOBの大きさを考慮
@@ -204,7 +203,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 										System.out.println(String.format(
 												"%s, %d : %d : %f/%f : %f/%f",
 												lel.getClass().getSimpleName(),
-												lep.swingProgressInt,
+												lep.field_110158_av,
 												lep.attackTime,
 												lep.getDistanceSqToEntity(lel),
 												lln, lep.rotationYawHead, lf));
@@ -216,7 +215,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 									}
 								}
 							}
-
+							
 							// クールタイム
 							lep.attackTime = 20;
 						}
@@ -234,7 +233,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 	}
 
 	@Override
-	public boolean renderItem(EntityLiving pEntityLiving, ItemStack pItemStack, int pIndex) {
+	public boolean renderItem(EntityLivingBase pEntityLiving, ItemStack pItemStack, int pIndex) {
 		return XEU_RenderWorldItem.renderItem(pEntityLiving, pItemStack, pIndex);
 	}
 
@@ -245,7 +244,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 	}
 
 	@Override
-	public String getRenderTexture() {
+	public ResourceLocation getRenderTexture() {
 		// TODO Auto-generated method stub
 		return null;
 	}

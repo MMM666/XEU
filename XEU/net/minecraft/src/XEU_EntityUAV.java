@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
 
 public class XEU_EntityUAV extends EntityPlayerSP {
 	
@@ -21,12 +20,12 @@ public class XEU_EntityUAV extends EntityPlayerSP {
 		}
 		System.out.println("UAV Down.");
 	}
-
+/*
 	@Override
 	public int getMaxHealth() {
 		return 0;
 	}
-
+*/
 	@Override
 	public void onUpdate() {
 		prevPosX = posX;

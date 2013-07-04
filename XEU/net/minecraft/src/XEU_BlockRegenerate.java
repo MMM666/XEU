@@ -17,6 +17,16 @@ public class XEU_BlockRegenerate extends Block {
 	}
 
 	@Override
+	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
+			int par3, int par4, int par5) {
+		return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+	}
+
+	@Override
+	public void registerIcons(IconRegister par1IconRegister) {
+	}
+
+	@Override
 	public int getBlockColor() {
 		double d = 0.5D;
 		double d1 = 1.0D;
@@ -67,6 +77,5 @@ public class XEU_BlockRegenerate extends Block {
 			}
 		}
 	}
-
 
 }

@@ -56,8 +56,14 @@ public class XEU_EntityVillager extends EntityVillager {
 	@Override
 	public EntityVillager func_90012_b(EntityAgeable par1EntityAgeable) {
 		EntityVillager var2 = new XEU_EntityVillager(this.worldObj);
-		var2.initCreature();
+//		var2.initCreature();
+		var2.func_110161_a((EntityLivingData)null);
 		return var2;
+	}
+
+	@Override
+	public boolean func_110164_bC() {
+		return true;
 	}
 
 }

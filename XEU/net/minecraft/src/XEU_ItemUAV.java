@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
 
 public class XEU_ItemUAV extends ItemSnowball {
 
@@ -19,7 +18,7 @@ public class XEU_ItemUAV extends ItemSnowball {
 		
 		if (!par2World.isRemote) {
 			Minecraft mc = MMM_Helper.mc;
-			XEU_EntityUAV uav = new XEU_EntityUAV(mc, par2World, mc.session, par2World.provider.dimensionId);
+			XEU_EntityUAV uav = new XEU_EntityUAV(mc, par2World, mc.func_110432_I(), par2World.provider.dimensionId);
 			uav.setPositionAndRotation(par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, par3EntityPlayer.rotationYaw, par3EntityPlayer.rotationPitch);
 			Vec3 vec = par3EntityPlayer.getLookVec();
 			uav.motionX = vec.xCoord * 3D;

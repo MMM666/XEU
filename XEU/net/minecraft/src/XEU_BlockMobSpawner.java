@@ -36,7 +36,7 @@ public class XEU_BlockMobSpawner extends BlockMobSpawner {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
+			EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
 		TileEntity ltile = par1World.getBlockTileEntity(par2, par3, par4);
 		if (ltile instanceof TileEntityMobSpawner) {
@@ -62,23 +62,21 @@ public class XEU_BlockMobSpawner extends BlockMobSpawner {
 			EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
 		ItemStack litemstack = par5EntityPlayer.getCurrentEquippedItem();
 		
-		if (litemstack != null && litemstack.getItem() instanceof ItemEditableBook) {
-			// 書き込み済み本によって属性を変更
-			if (litemstack.getDisplayName().contains("ChangeSpawner")) {
-				NBTTagList llist = (NBTTagList)litemstack.getTagCompound().getTag("pages");
-				String ls = ((NBTTagString)llist.tagAt(0)).data.split("\n")[0];
-				if (ls != null && !ls.isEmpty()) {
-					TileEntity ltile = par1World.getBlockTileEntity(par2, par3, par4);
-					if (ltile instanceof TileEntityMobSpawner) {
-						MobSpawnerBaseLogic llogic = ((TileEntityMobSpawner)ltile).func_98049_a();
-						llogic.setMobID(ls);
-						try {
-							// クリアしないと表示が変わらない。
-							ModLoader.setPrivateValue(MobSpawnerBaseLogic.class, llogic, 9, null);
-						} catch (Exception e) {
-						}
+		if (litemstack != null) {
+			if (litemstack.getItem() instanceof ItemEditableBook) {
+				// 書き込み済み本によって属性を変更
+				if (litemstack.getDisplayName().contains("ChangeSpawner")) {
+					NBTTagList llist = (NBTTagList)litemstack.getTagCompound().getTag("pages");
+					String ls = ((NBTTagString)llist.tagAt(0)).data.split("\n")[0];
+					if (ls != null && !ls.isEmpty()) {
+						rewriteSpawner(par1World, par2, par3, par4, ls);
 					}
+					litemstack.stackSize--;
+					return true;
 				}
+			} else if (litemstack.getItem() instanceof ItemMonsterPlacer) {
+				// モンスターエッグで書換
+				rewriteSpawner(par1World, par2, par3, par4, EntityList.getStringFromID(litemstack.getItemDamage()));
 				litemstack.stackSize--;
 				return true;
 			}
@@ -86,6 +84,19 @@ public class XEU_BlockMobSpawner extends BlockMobSpawner {
 		
 		return super.onBlockActivated(par1World, par2, par3, par4,
 				par5EntityPlayer, par6, par7, par8, par9);
+	}
+
+	protected void rewriteSpawner(World pWorld, int pX, int pY, int pZ, String pName) {
+		TileEntity ltile = pWorld.getBlockTileEntity(pX, pY, pZ);
+		if (ltile instanceof TileEntityMobSpawner) {
+			MobSpawnerBaseLogic llogic = ((TileEntityMobSpawner)ltile).func_98049_a();
+			llogic.setMobID(pName);
+			try {
+				// クリアしないと表示が変わらない。
+				ModLoader.setPrivateValue(MobSpawnerBaseLogic.class, llogic, 9, null);
+			} catch (Exception e) {
+			}
+		}
 	}
 
 }

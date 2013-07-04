@@ -1,20 +1,15 @@
 package net.minecraft.src;
 
-import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.Frame;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.lwjgl.LWJGLException;
+import net.minecraft.server.MinecraftServer;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
 
 public class mod_XEU_ExpUpper extends BaseMod {
 	
@@ -37,6 +32,10 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	
 	@MLProp
 	public static boolean moveWindow = true;
+	@MLProp
+	public static int windowPosX = 20;
+	@MLProp
+	public static int windowPosY = 50;
 	
 	@MLProp
 	public static int ItemIDGezai = 22293;
@@ -60,7 +59,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-x";
+		return "1.6.1-x";
 	}
 
 	@Override
@@ -113,7 +112,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// RAYXANBER
 		if (ItemIDRAYXANBER > 0) {
-			itemRAYXANBER = (new XEU_ItemRAYXANBER(ItemIDRAYXANBER - 256, EnumToolMaterial.IRON)).setUnlocalizedName("RAYXANBER");
+			itemRAYXANBER = (new XEU_ItemRAYXANBER(ItemIDRAYXANBER - 256, EnumToolMaterial.IRON)).setUnlocalizedName("RAYXANBER").func_111206_d("RAYXANBER");
 			ModLoader.addName(itemRAYXANBER, "RAYXANBER");
 			ModLoader.addName(itemRAYXANBER, "ja_JP", "óãéaên");
 			ModLoader.addRecipe(new ItemStack(itemRAYXANBER), new Object[] {
@@ -136,7 +135,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// UAV
 		if (ItemIDUAV > 0 && MMM_Helper.isClient) {
-			itemUAV = (new XEU_ItemUAV(ItemIDUAV - 256)).setUnlocalizedName("uav");
+			itemUAV = (new XEU_ItemUAV(ItemIDUAV - 256)).setUnlocalizedName("uav").func_111206_d("uav");
 			ModLoader.addName(itemUAV, "UAV");
 			ModLoader.addName(itemUAV, "ja_JP", "íTç∏ã@");
 			ModLoader.addRecipe(new ItemStack(itemUAV), new Object[] {
@@ -151,7 +150,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// çïîLÉnÉìÉh
 		if (ItemIDCatRemover > 0) {
-			itemCatRemover = (new XEU_ItemCatRemover(ItemIDCatRemover - 256)).setUnlocalizedName("catHand");
+			itemCatRemover = (new XEU_ItemCatRemover(ItemIDCatRemover - 256)).setUnlocalizedName("catHand").func_111206_d("catHand");
 			ModLoader.addName(itemCatRemover, "Cat Hand");
 			ModLoader.addName(itemCatRemover, "ja_JP", "çïîLÉnÉìÉh");
 			ModLoader.addRecipe(new ItemStack(itemCatRemover), new Object[] {
@@ -167,7 +166,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		if (ItemIDGezai > 0) {
 			// íéâ∫Çµ
-			itemGezai = (new XEU_ItemGezai(ItemIDGezai - 256, -5, 1.0F, false)).setUnlocalizedName("gezai");
+			itemGezai = (new XEU_ItemGezai(ItemIDGezai - 256, -5, 1.0F, false)).setUnlocalizedName("gezai").func_111206_d("gezai");
 			ModLoader.addName(itemGezai, "GEZAI");
 			ModLoader.addName(itemGezai, "ja_JP", "â∫ç‹");
 			ModLoader.addRecipe(new ItemStack(itemGezai), new Object[] {
@@ -181,17 +180,20 @@ public class mod_XEU_ExpUpper extends BaseMod {
 			Component oo = Display.getParent();
 			do {
 				if (oo == null) {
-					System.out.println("owner null.");
+					Debug("window size : %d, %d", Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+					Display.setResizable(false);
+					Display.setLocation(windowPosX, windowPosY);
+					Display.setResizable(true);
+					Debug("Component: Display");
+					break;
 				} else {
-					System.out.println(oo.getName());
+					Debug(oo.getName());
 				}
 				if (oo instanceof Frame) {
-//                    oo.setLocation(-1800, 100);
-//                    oo.setLocation(1000, 100);
-					oo.setLocation(20, 50);
-					System.out.println("move window location.");
+					oo.setLocation(windowPosX, windowPosY);
+					Debug("move window location.");
 					for (int li = 0; li < ((Frame) oo).getWindows().length; li++) {
-						System.out.println("ComponentCount:" + ((Frame) oo).getWindows()[li]);
+						Debug("ComponentCount:" + ((Frame) oo).getWindows()[li]);
 					}
 					break;
 				}
@@ -205,13 +207,13 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		ModLoader.setInGameHook(this, true, false);
 		
-		System.out.println(String.format("MoudeButtonCount:%d", Mouse.getButtonCount()));
+		Debug("MoudeButtonCount:%d", Mouse.getButtonCount());
 		
 		// ë∫êlãséEÇ«ÇÎÇ¡Ç“
 		MMM_Helper.replaceEntityList(EntityVillager.class, XEU_EntityVillager.class);
 		if (ItemIDVillager > 0) {
-			itemVillagerRaw = (new XEU_ItemVillagerFlesh(ItemIDVillager + 0, 3, 0.3F, true)).setUnlocalizedName("villagerRaw");
-			itemVillagerCooked = (new XEU_ItemVillagerFlesh(ItemIDVillager + 1, 8, 0.8F, true)).setUnlocalizedName("villagerCooked");
+			itemVillagerRaw = (new XEU_ItemVillagerFlesh(ItemIDVillager + 0, 3, 0.3F, true)).setUnlocalizedName("villagerRaw").func_111206_d("villagerRaw");
+			itemVillagerCooked = (new XEU_ItemVillagerFlesh(ItemIDVillager + 1, 8, 0.8F, true)).setUnlocalizedName("villagerCooked").func_111206_d("villagerCooked");
 			ModLoader.addLocalization("message.xeu.eatVillager", "Delicious! This is your favorite villager flesh! ");
 			ModLoader.addLocalization("message.xeu.eatVillager", "ja_JP", "Ç§Ç‹Ç¢!Ç±ÇÍÇÕÇ†Ç»ÇΩÇÃçDÇ´Ç»êlì˜Çæ!");
 			ModLoader.addName(itemVillagerRaw, "?Raw Meat");
@@ -223,7 +225,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 		
 		// SilkMobSpawner
 		Block.blocksList[Block.mobSpawner.blockID] = null;
-		Block lmob = new XEU_BlockMobSpawner(Block.mobSpawner.blockID).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mobSpawner").disableStats().setCreativeTab(CreativeTabs.tabDecorations);
+		Block lmob = new XEU_BlockMobSpawner(Block.mobSpawner.blockID).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mobSpawner").disableStats().func_111022_d("mob_spawner").setCreativeTab(CreativeTabs.tabDecorations);
 		if (MMM_Helper.replaceBlock(Block.mobSpawner, lmob)) {
 			Debug("replace mobSpawner");
 		} else {

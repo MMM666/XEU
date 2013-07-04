@@ -31,12 +31,12 @@ public class XEU_ItemCatRemover extends Item {
 		System.out.println("break cat2.");
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
-	
-	
+
+
 	@Override
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
 			int par3, int par4, int par5, int par6,
-			EntityLiving par7EntityLiving) {
+			EntityLivingBase par7EntityLiving) {
 		// onBlockDestroyed
 		System.out.println("break cat.");
 		TileEntity tileentity = par7EntityLiving.worldObj.getBlockTileEntity(par3, par4, par5);
