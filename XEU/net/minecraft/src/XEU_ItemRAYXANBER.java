@@ -221,8 +221,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 						}
 						try {
 							// UŒ‚ŠÔŠu‚ğ‹­§“I‚ÉL‚Î‚·(˜A‘Å‚ªŒø‚©‚È‚¢‚æ‚¤‚É)
-							ModLoader.setPrivateValue(Minecraft.class, lmc, 28,
-									lep.attackTime);
+							ModLoader.setPrivateValue(Minecraft.class, lmc, 28, lep.attackTime);
 						} catch (Exception e) {
 						}
 					}
