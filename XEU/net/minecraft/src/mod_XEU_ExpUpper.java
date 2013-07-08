@@ -268,7 +268,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 	public void addRenderer(Map map) {
 		map.put(XEU_EntityUAV.class, new MMM_RenderDummy());
 		// ŠJ”­ŠÂ‹«‚¾‚Æ‚¤‚Ü‚­“®ì‚µ‚È‚¢‚Ì‚Å‚»‚Ì‘Îô
-		map.put(EntityPlayer.class, new RenderPlayer());
+//		map.put(EntityPlayer.class, new RenderPlayer());
 		map.put(XEU_EntityVillager.class, new RenderVillager());
 	}
 
@@ -278,11 +278,12 @@ public class mod_XEU_ExpUpper extends BaseMod {
 //       		entityUAV.onUpdate();
 		}
 		if (minecraft.isIntegratedServerRunning() && !MMM_Helper.isForge) {
+			// ‘ºl’u‚«Š·‚¦
 			for (int lj = 0; lj < MinecraftServer.getServer().worldServers.length; lj++) {
 				List llist = MinecraftServer.getServer().worldServers[lj].loadedEntityList;
 				for (int li = 0; li < llist.size(); li++) {
 					Entity lentity = (Entity)llist.get(li);
-					if (lentity.getClass().isAssignableFrom(EntityVillager.class)) {
+					if (lentity != null && lentity.getClass().isAssignableFrom(EntityVillager.class)) {
 						XEU_EntityVillager.respawnVillager((EntityVillager)lentity);
 					}
 				}
