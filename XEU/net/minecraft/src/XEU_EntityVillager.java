@@ -11,6 +11,7 @@ public class XEU_EntityVillager extends EntityVillager {
 	}
 
 	public static void respawnVillager(EntityVillager pEntity) {
+		// íuÇ´ä∑Ç¶ÇÊÇ§
 		if (pEntity.isDead) return;
 		XEU_EntityVillager lentity = new XEU_EntityVillager(pEntity.worldObj, pEntity.getProfession());
 		lentity.setLocationAndAngles(pEntity.posX, pEntity.posY, pEntity.posZ, pEntity.rotationYaw, pEntity.rotationPitch);
@@ -55,6 +56,7 @@ public class XEU_EntityVillager extends EntityVillager {
 
 	@Override
 	public EntityVillager func_90012_b(EntityAgeable par1EntityAgeable) {
+		// éqçÏÇË
 		EntityVillager var2 = new XEU_EntityVillager(this.worldObj);
 //		var2.initCreature();
 		var2.func_110161_a((EntityLivingData)null);
@@ -63,6 +65,7 @@ public class XEU_EntityVillager extends EntityVillager {
 
 	@Override
 	public boolean func_110164_bC() {
+		// éÒÇ…ìÍÇ¬ÇØÇÈ
 		return true;
 	}
 

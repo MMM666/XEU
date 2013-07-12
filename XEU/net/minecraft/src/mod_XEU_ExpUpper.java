@@ -59,7 +59,7 @@ public class mod_XEU_ExpUpper extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.1-x";
+		return "1.6.2-x";
 	}
 
 	@Override

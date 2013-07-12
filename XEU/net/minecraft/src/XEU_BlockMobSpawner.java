@@ -22,7 +22,7 @@ public class XEU_BlockMobSpawner extends BlockMobSpawner {
 			if (litemstack != null) {
 				TileEntity ltile = par1World.getBlockTileEntity(par2, par3, par4);
 				if (ltile instanceof TileEntityMobSpawner) {
-					String ls = ((TileEntityMobSpawner)ltile).func_98049_a().getEntityNameToSpawn();
+					String ls = ((TileEntityMobSpawner)ltile).getSpawnerLogic().getEntityNameToSpawn();
 					NBTTagCompound lnbt = new NBTTagCompound();
 					NBTTagList llist = new NBTTagList("Lore");
 					llist.appendTag(new NBTTagString("Lore", ls));
@@ -48,7 +48,7 @@ public class XEU_BlockMobSpawner extends BlockMobSpawner {
 					NBTTagList llist = lnbt.getTagList("Lore");
 					if (llist.tagCount() > 0) {
 						String ls = ((NBTTagString)llist.tagAt(0)).data;
-						((TileEntityMobSpawner)ltile).func_98049_a().setMobID(ls);
+						((TileEntityMobSpawner)ltile).getSpawnerLogic().setMobID(ls);
 					}
 				}
 			} else {
@@ -89,7 +89,7 @@ public class XEU_BlockMobSpawner extends BlockMobSpawner {
 	protected void rewriteSpawner(World pWorld, int pX, int pY, int pZ, String pName) {
 		TileEntity ltile = pWorld.getBlockTileEntity(pX, pY, pZ);
 		if (ltile instanceof TileEntityMobSpawner) {
-			MobSpawnerBaseLogic llogic = ((TileEntityMobSpawner)ltile).func_98049_a();
+			MobSpawnerBaseLogic llogic = ((TileEntityMobSpawner)ltile).getSpawnerLogic();
 			llogic.setMobID(pName);
 			try {
 				// クリアしないと表示が変わらない。

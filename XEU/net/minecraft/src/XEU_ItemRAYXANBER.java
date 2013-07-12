@@ -21,7 +21,7 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 		Vec3 var5 = pEntityLiving.getLook(pDelta);
 		Vec3 var6 = var4.addVector(var5.xCoord * pRange, var5.yCoord * pRange,
 				var5.zCoord * pRange);
-		return pEntityLiving.worldObj.rayTraceBlocks(var4, var6);
+		return pEntityLiving.worldObj.clip(var4, var6);
 	}
 
 	@Override
