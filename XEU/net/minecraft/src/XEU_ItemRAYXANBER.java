@@ -176,11 +176,11 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 							}
 							// 自身の周囲のMOBを獲得
 							List llist = par2World.getEntitiesWithinAABB(
-									EntityLiving.class,
+									EntityLivingBase.class,
 									par3Entity.boundingBox.expand(5D, 0D, 5D));
 							for (int lj = 0; lj < llist.size(); lj++) {
 								// 自分と通常の処理対象は除外
-								EntityLivingBase lel = (EntityLiving) llist.get(lj);
+								EntityLivingBase lel = (EntityLivingBase) llist.get(lj);
 								if (lel == lentity || lel == lep)
 									continue;
 								// 射程距離の判定、MOBの大きさを考慮
