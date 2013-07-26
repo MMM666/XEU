@@ -232,12 +232,13 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 	}
 
 	@Override
-	public boolean renderItem(EntityLivingBase pEntityLiving, ItemStack pItemStack, int pIndex) {
+	public boolean renderItem(Entity pEntityLiving, ItemStack pItemStack, int pIndex) {
 		return XEU_RenderWorldItem.renderItem(pEntityLiving, pItemStack, pIndex);
 	}
 
 	@Override
-	public boolean renderItemInFirstPerson(float pDeltaTimepRenderPhatialTick, MMM_ItemRenderer pItemRenderer) {
+	public boolean renderItemInFirstPerson(Entity pEntity,
+			ItemStack pItemStack, float pDeltaTimepRenderPhatialTick) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -250,6 +251,24 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 
 	@Override
 	public boolean isRenderItemWorld() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean renderItemWorld() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRenderItem() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRenderItemInFirstPerson() {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -17,7 +17,7 @@ public class XEU_RenderWorldItem {
 	protected static IntBuffer glOcclusionQueryBase;
 
 
-	public static boolean renderItem(EntityLivingBase pEntityLiving,
+	public static boolean renderItem(Entity pEntity,
 			ItemStack pItemStack, int pIndex) {
 		if (worldItem == null) {
 			occlusionEnabled = OpenGlCapsChecker.checkARBOcclusion();
