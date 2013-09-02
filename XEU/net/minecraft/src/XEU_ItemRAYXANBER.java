@@ -244,31 +244,31 @@ public class XEU_ItemRAYXANBER extends ItemSword implements MMM_IItemRenderManag
 	}
 
 	@Override
-	public ResourceLocation getRenderTexture() {
+	public ResourceLocation getRenderTexture(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isRenderItemWorld() {
+	public boolean isRenderItemWorld(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean renderItemWorld() {
+	public boolean renderItemWorld(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean isRenderItem() {
+	public boolean isRenderItem(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean isRenderItemInFirstPerson() {
+	public boolean isRenderItemInFirstPerson(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
